@@ -1,10 +1,7 @@
 public class Main {
     public static void main(String[] args) {
 
-        Metodos.Connecting();
-
-        //  Metodos.update();
-        // Metodos.borrar();
+        //Metodos.Connecting();
 
          Swing gui = new Swing();
          gui.run();

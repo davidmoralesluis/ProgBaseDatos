@@ -5,10 +5,9 @@ import java.sql.*;
 public class Metodos {
 
 
-
-    public static ResultSet Connecting(){
+    public static void Connecting() {
         String url = "jdbc:sqlite:src" + File.separator + "main" + File.separator + "BaseDatos.db";
-        ResultSet result=null;
+
         try {
             Connection conex = DriverManager.getConnection(url);
 
@@ -16,49 +15,65 @@ public class Metodos {
 
             ResultSet reSet = dec.executeQuery("Select * from Legend");
 
-            if (conex!=null) {
+            if (conex != null) {
                 System.out.println("Conectado");
             }
 
-            result=reSet;
+            for (int i = 0; i < 5; i++) {
+                System.out.println("+++++++++");
+            }
+            while(reSet.next()){
+                System.out.println(reSet.getString("ID")+" - "+reSet.getString("Nombre")+" tiene el dorsal Nr. "+reSet.getString("Dorsal"));
+            }
+            for (int i = 0; i < 5; i++) {
+                System.out.println("+++++++++");
+            }
 
-        }catch (SQLException ex) {
-            System.err.println("Error al conectar a la BD\n"+ex.getMessage());
+        } catch (SQLException ex) {
+            System.err.println("Error al conectar a la BD\n" + ex.getMessage());
         }
 
-        return result;
+
     }
 
-    public static ResultSet insertar(){
+    public static void insertar() {
 
         String url = "jdbc:sqlite:src" + File.separator + "main" + File.separator + "BaseDatos.db";
-        ResultSet result=null;
+
         try {
             Connection conex = DriverManager.getConnection(url);
 
             Statement dec = conex.createStatement();
 
-            PreparedStatement pre = conex.prepareStatement("INSERT INTO Legend(Nombre,Equipo,Dorsal) VALUES(?,?,?)");
+            PreparedStatement pre = conex.prepareStatement("INSERT INTO Legend(ID,Nombre,Equipo,Dorsal) VALUES(?,?,?,?)");
             {
-                pre.setString(1, JOptionPane.showInputDialog("name?"));
-                pre.setString(2, JOptionPane.showInputDialog("Equipo?"));
-                pre.setString(3, JOptionPane.showInputDialog("Dorsal?"));
+                pre.setString(1, JOptionPane.showInputDialog("ID?"));
+                pre.setString(2, JOptionPane.showInputDialog("name?"));
+                pre.setString(3, JOptionPane.showInputDialog("Equipo?"));
+                pre.setString(4, JOptionPane.showInputDialog("Dorsal?"));
                 pre.executeUpdate();
             }
 
             ResultSet reSet = dec.executeQuery("Select * from Legend");
 
-            result=reSet;
-        }catch (SQLException err){
+            for (int i = 0; i < 5; i++) {
+                System.out.println("+++++++++");
+            }
+            while(reSet.next()){
+                System.out.println(reSet.getString("ID")+" - "+reSet.getString("Nombre")+" tiene el dorsal Nr. "+reSet.getString("Dorsal"));
+            }
+            for (int i = 0; i < 5; i++) {
+                System.out.println("+++++++++");
+            }
+
+        } catch (SQLException err) {
             System.out.println(err.getMessage());
         }
-        return result;
     }
 
-    public static ResultSet update(){
+    public static void update() {
 
         String url = "jdbc:sqlite:src" + File.separator + "main" + File.separator + "BaseDatos.db";
-        ResultSet result=null;
         try {
             Connection conex = DriverManager.getConnection(url);
 
@@ -75,62 +90,50 @@ public class Metodos {
 
             ResultSet reSet = dec.executeQuery("Select * from Legend");
 
-            result=reSet;
-        }catch (SQLException err){
+            for (int i = 0; i < 5; i++) {
+                System.out.println("+++++++++");
+            }
+            while(reSet.next()){
+                System.out.println(reSet.getString("ID")+" - "+reSet.getString("Nombre")+" tiene el dorsal Nr. "+reSet.getString("Dorsal"));
+            }
+            for (int i = 0; i < 5; i++) {
+                System.out.println("+++++++++");
+            }
+
+        } catch (SQLException err) {
             System.out.println(err.getMessage());
         }
-        return result;
     }
 
-    public static ResultSet borrar(){
+    public static void borrar() {
 
         String url = "jdbc:sqlite:src" + File.separator + "main" + File.separator + "BaseDatos.db";
-        ResultSet result=null;
         try {
             Connection conex = DriverManager.getConnection(url);
 
             Statement dec = conex.createStatement();
 
-            System.out.println("11111");
-            PreparedStatement pre = conex.prepareStatement("DELETE FROM Legend WHERE ID=?");
-            pre.setInt(1, Integer.parseInt(JOptionPane.showInputDialog("ID??")));
-            pre.execute();
-
-
-            /*
-             Connection conn = null;
-
-        try {
-
-            conn = new DBConnection().getConn();
-
-            PreparedStatement psUser = conn.prepareStatement("DELETE FROM Usuario WHERE idUsuario=?");
-            psUser.setString(1, u.getCode() );
-            psUser.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+            PreparedStatement pre = conex.prepareStatement("Delete FROM Legend WHERE ID=?");
+            {
+                pre.setString(1, JOptionPane.showInputDialog("ID??"));
+                pre.executeUpdate();
             }
-        }
-            */
 
-            System.out.println("22222");
             ResultSet reSet = dec.executeQuery("Select * from Legend");
+
+            for (int i = 0; i < 5; i++) {
+                System.out.println("+++++++++");
+            }
             while(reSet.next()){
                 System.out.println(reSet.getString("ID")+" - "+reSet.getString("Nombre")+" tiene el dorsal Nr. "+reSet.getString("Dorsal"));
             }
+            for (int i = 0; i < 5; i++) {
+                System.out.println("+++++++++");
+            }
 
-            System.out.println("33333");
-            result=reSet;
-        }catch (SQLException err){
+
+        } catch (SQLException err) {
             System.out.println(err.getMessage());
-            System.out.println("borrar");
         }
-        return result;
     }
 }
