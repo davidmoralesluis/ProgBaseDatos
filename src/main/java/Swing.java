@@ -77,6 +77,14 @@ public class Swing implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         ResultSet reSet;
+
+
+        if(e.getSource()==borrar){
+
+            reSet=Metodos.borrar();
+
+        }
+
         if(e.getSource()==conectar){
 
             reSet=Metodos.Connecting();
@@ -92,11 +100,7 @@ public class Swing implements ActionListener {
             }
         }
 
-        if(e.getSource()==borrar){
 
-            reSet=Metodos.borrar();
-
-        }
 
 
 

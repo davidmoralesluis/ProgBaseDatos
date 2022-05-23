@@ -91,14 +91,41 @@ public class Metodos {
 
             Statement dec = conex.createStatement();
 
+            System.out.println("11111");
             PreparedStatement pre = conex.prepareStatement("DELETE FROM Legend WHERE ID=?");
-            {
-                pre.setString(1, JOptionPane.showInputDialog("ID??"));
-                pre.executeUpdate();
+            pre.setInt(1, Integer.parseInt(JOptionPane.showInputDialog("ID??")));
+            pre.execute();
+
+
+            /*
+             Connection conn = null;
+
+        try {
+
+            conn = new DBConnection().getConn();
+
+            PreparedStatement psUser = conn.prepareStatement("DELETE FROM Usuario WHERE idUsuario=?");
+            psUser.setString(1, u.getCode() );
+            psUser.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+            */
+
+            System.out.println("22222");
+            ResultSet reSet = dec.executeQuery("Select * from Legend");
+            while(reSet.next()){
+                System.out.println(reSet.getString("ID")+" - "+reSet.getString("Nombre")+" tiene el dorsal Nr. "+reSet.getString("Dorsal"));
             }
 
-            ResultSet reSet = dec.executeQuery("Select * from Legend");
-
+            System.out.println("33333");
             result=reSet;
         }catch (SQLException err){
             System.out.println(err.getMessage());
